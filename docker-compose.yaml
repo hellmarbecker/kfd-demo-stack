@@ -47,7 +47,7 @@ services:
   zookeeper:
     image: zookeeper:latest
     container_name: zookeeper
-    profiles: ["kafka-flink-druid", "all-services"]
+    profiles: ["datagen-kafka", "kafka-flink-druid", "all-services"]
     environment:
       - ZOO_MY_ID=1
       - ALLOW_ANONYMOUS_LOGIN=yes
@@ -55,7 +55,7 @@ services:
   kafka:
     image: bitnami/kafka:latest
     container_name: kafka-broker
-    profiles: ["kafka-flink-druid", "all-services"]
+    profiles: ["datagen-kafka", "kafka-flink-druid", "all-services"]
     ports:
     # To learn about configuring Kafka for access across networks see
     # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
@@ -210,4 +210,10 @@ services:
         state.checkpoints.dir: file:///tmp/flink-checkpoints
         heartbeat.interval: 1000
         heartbeat.timeout: 5000
+
+  news-datagen:
+    build: news-datagen/.
+    profiles: ["datagen-kafka", "all-services"]
+    depends_on:
+      - kafka
 

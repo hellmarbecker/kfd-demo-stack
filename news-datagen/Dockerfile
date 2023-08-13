@@ -46,4 +46,4 @@ COPY . .
 # EXPOSE 8000
 
 # Run the application.
-CMD python3 news_process.py -f ./news_config_meetup.yml -n -q
+CMD python3 news_process.py -f ./news_config_local.yml -q
