@@ -35,7 +35,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: postgres
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     volumes:
       - metadata_data:/var/lib/postgresql/data
     environment:
@@ -47,7 +47,7 @@ services:
   zookeeper:
     image: zookeeper:latest
     container_name: zookeeper
-    profiles: ["druid-flink", "kafka-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     environment:
       - ZOO_MY_ID=1
       - ALLOW_ANONYMOUS_LOGIN=yes
@@ -55,7 +55,7 @@ services:
   kafka:
     image: bitnami/kafka:latest
     container_name: kafka-broker
-    profiles: ["kafka-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     ports:
     # To learn about configuring Kafka for access across networks see
     # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
@@ -75,7 +75,7 @@ services:
   coordinator:
     image: apache/druid:${DRUID_VERSION:-26.0.0}
     container_name: coordinator
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     volumes:
       - druid_shared:/opt/shared
       - coordinator_var:/opt/druid/var
@@ -92,7 +92,7 @@ services:
   broker:
     image: apache/druid:${DRUID_VERSION:-26.0.0}
     container_name: broker
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     volumes:
       - broker_var:/opt/druid/var
     depends_on: 
@@ -109,7 +109,7 @@ services:
   historical:
     image: apache/druid:${DRUID_VERSION:-26.0.0}
     container_name: historical
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     volumes:
       - druid_shared:/opt/shared
       - historical_var:/opt/druid/var
@@ -127,7 +127,7 @@ services:
   middlemanager:
     image: apache/druid:${DRUID_VERSION:-26.0.0}
     container_name: middlemanager
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     volumes:
       - druid_shared:/opt/shared
       - middle_var:/opt/druid/var
@@ -146,7 +146,7 @@ services:
   router:
     image: apache/druid:${DRUID_VERSION:-26.0.0}
     container_name: router
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     volumes:
       - router_var:/opt/druid/var
     depends_on:
@@ -162,7 +162,7 @@ services:
 
   sql-client:
     build: sql-client/.
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     command: bin/sql-client.sh
     depends_on:
       - jobmanager
@@ -175,7 +175,7 @@ services:
 
   jobmanager:
     build: sql-client/.
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     ports:
       - "18081:18081"
     command: jobmanager
@@ -195,7 +195,7 @@ services:
 
   taskmanager:
     build: sql-client/.
-    profiles: ["druid-flink", "all-services"]
+    profiles: ["kafka-flink-druid", "all-services"]
     depends_on:
       - jobmanager
     command: taskmanager
