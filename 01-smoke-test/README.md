@@ -1,4 +1,6 @@
-create internal table with fake data
+# Instructions for Demo 01
+
+## create internal table with fake data
 
 ```sql
 CREATE TABLE `pageviews` (
@@ -16,7 +18,7 @@ CREATE TABLE `pageviews` (
 );
 ```
 
-create kafka backed table
+## create kafka backed table
 
 ```sql
 CREATE TABLE pageviews_kafka (
@@ -35,13 +37,15 @@ CREATE TABLE pageviews_kafka (
 );
 ```
 
-push data from the internal table to the kafka table
+this will create the topic because autocreate is on in the local kafka
+
+## push data from the internal table to the kafka table
 
 ```sql
 INSERT INTO pageviews_kafka SELECT * FROM pageviews;
 ```
 
-run `kcat` on the host to verify that data is there
+## run `kcat` on the host to verify that data is there
 
 ```bash
 kcat -b localhost:9094 -L 
