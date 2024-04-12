@@ -73,7 +73,7 @@ services:
       - KAFKA_ENABLE_KRAFT=false
 
   coordinator:
-    image: apache/druid:${DRUID_VERSION:-26.0.0}
+    image: apache/druid:${DRUID_VERSION:-29.0.0}
     container_name: coordinator
     profiles: ["kafka-flink-druid", "all-services"]
     volumes:
@@ -90,7 +90,7 @@ services:
       - environment
 
   broker:
-    image: apache/druid:${DRUID_VERSION:-26.0.0}
+    image: apache/druid:${DRUID_VERSION:-29.0.0}
     container_name: broker
     profiles: ["kafka-flink-druid", "all-services"]
     volumes:
@@ -107,7 +107,7 @@ services:
       - environment
 
   historical:
-    image: apache/druid:${DRUID_VERSION:-26.0.0}
+    image: apache/druid:${DRUID_VERSION:-29.0.0}
     container_name: historical
     profiles: ["kafka-flink-druid", "all-services"]
     volumes:
@@ -125,7 +125,7 @@ services:
       - environment
 
   middlemanager:
-    image: apache/druid:${DRUID_VERSION:-26.0.0}
+    image: apache/druid:${DRUID_VERSION:-29.0.0}
     container_name: middlemanager
     profiles: ["kafka-flink-druid", "all-services"]
     volumes:
@@ -144,7 +144,7 @@ services:
       - environment
 
   router:
-    image: apache/druid:${DRUID_VERSION:-26.0.0}
+    image: apache/druid:${DRUID_VERSION:-29.0.0}
     container_name: router
     profiles: ["kafka-flink-druid", "all-services"]
     volumes:
@@ -216,4 +216,12 @@ services:
     profiles: ["datagen-kafka", "all-services"]
     depends_on:
       - kafka
+
+  metabase:
+    image: metabase/metabase:latest
+    profiles: ["metabase", "all-services"]
+    hostname: metabase
+    container_name: metabase
+    ports:
+      - "3000:3000"
 
