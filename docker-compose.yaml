@@ -35,7 +35,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: postgres
-    profiles: ["kafka-flink-druid", "all-services"]
+    profiles: ["kafka-flink-druid", "druid-only", "all-services"]
     volumes:
       - metadata_data:/var/lib/postgresql/data
     environment:
@@ -47,7 +47,7 @@ services:
   zookeeper:
     image: zookeeper:latest
     container_name: zookeeper
-    profiles: ["datagen-kafka", "kafka-flink-druid", "all-services"]
+    profiles: ["datagen-kafka", "kafka-flink-druid", "druid-only", "all-services"]
     environment:
       - ZOO_MY_ID=1
       - ALLOW_ANONYMOUS_LOGIN=yes
