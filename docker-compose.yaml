@@ -75,7 +75,7 @@ services:
   coordinator:
     image: apache/druid:${DRUID_VERSION:-29.0.1}
     container_name: coordinator
-    profiles: ["kafka-flink-druid", "all-services"]
+    profiles: ["kafka-flink-druid", "druid-only", "all-services"]
     volumes:
       - druid_shared:/opt/shared
       - coordinator_var:/opt/druid/var
@@ -92,7 +92,7 @@ services:
   broker:
     image: apache/druid:${DRUID_VERSION:-29.0.1}
     container_name: broker
-    profiles: ["kafka-flink-druid", "all-services"]
+    profiles: ["kafka-flink-druid", "druid-only", "all-services"]
     volumes:
       - broker_var:/opt/druid/var
     depends_on: 
@@ -109,7 +109,7 @@ services:
   historical:
     image: apache/druid:${DRUID_VERSION:-29.0.1}
     container_name: historical
-    profiles: ["kafka-flink-druid", "all-services"]
+    profiles: ["kafka-flink-druid", "druid-only", "all-services"]
     volumes:
       - druid_shared:/opt/shared
       - historical_var:/opt/druid/var
@@ -127,7 +127,7 @@ services:
   middlemanager:
     image: apache/druid:${DRUID_VERSION:-29.0.1}
     container_name: middlemanager
-    profiles: ["kafka-flink-druid", "all-services"]
+    profiles: ["kafka-flink-druid", "druid-only", "all-services"]
     volumes:
       - druid_shared:/opt/shared
       - middle_var:/opt/druid/var
@@ -146,7 +146,7 @@ services:
   router:
     image: apache/druid:${DRUID_VERSION:-29.0.1}
     container_name: router
-    profiles: ["kafka-flink-druid", "all-services"]
+    profiles: ["kafka-flink-druid", "druid-only", "all-services"]
     volumes:
       - router_var:/opt/druid/var
     depends_on:
