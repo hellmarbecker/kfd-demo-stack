@@ -2,6 +2,7 @@ CREATE TABLE `adsb-json` (
   `kafka_timestamp`         TIMESTAMP_LTZ(3)           METADATA FROM 'timestamp',
   `kafka_headers`           MAP<BYTES, BYTES> NOT NULL METADATA FROM 'headers',
   `kafka_key`               STRING,
+  `event_timestamp`         STRING,
   `message_type`            VARCHAR,
   `transmission_type`       INTEGER,
   `session_id`              INTEGER,
