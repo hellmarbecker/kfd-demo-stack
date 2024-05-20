@@ -1,6 +1,6 @@
 CREATE TABLE `adsb-raw` (
   `kafka_timestamp` TIMESTAMP_LTZ(3) METADATA FROM 'timestamp',
-  `kafka_headers` MAP NOT NULL METADATA FROM 'headers',
+  `kafka_headers` MAP<BYTES, BYTES> NOT NULL METADATA FROM 'headers',
   message_type            VARCHAR,
   transmission_type       INTEGER,
   session_id              INTEGER,
