@@ -34,7 +34,7 @@ CREATE TABLE `adsb-json` (
   'key.fields-prefix' = 'kafka_', 
   'value.format' = 'json', 
   'value.fields-include' = 'EXCEPT_KEY',
-  'properties.bootstrap.servers' = 'kafka:9094',
+  'properties.bootstrap.servers' = 'kafka:9092',
   'sink.partitioner' = 'fixed'
 );
 
