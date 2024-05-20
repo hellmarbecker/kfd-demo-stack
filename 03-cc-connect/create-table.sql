@@ -32,6 +32,5 @@ CREATE TABLE `adsb-raw` (
   'properties.security.protocol' = 'SASL_SSL',
   'properties.sasl.mechanism' = 'PLAIN',
   'properties.sasl.jaas.config' = 'org.apache.kafka.common.security.plain.PlainLoginModule  required username="<Confluent Cloud API Key>" password="<Confluent Cloud API Secret>";',
-  'value.fields' = 'MT;TT;SID;AID;Hex;FID;DMG;TMG;DML;TML;CS;Alt;GS;Trk;Lat;Lng;VR;Sq;Alrt;Emer;SPI;Gnd',  
   'value.format' = 'csv'
 );
