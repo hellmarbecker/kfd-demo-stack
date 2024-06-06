@@ -51,7 +51,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 18,
+        "h": 22,
         "w": 10,
         "x": 0,
         "y": 0
@@ -265,8 +265,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 18,
-        "w": 10,
+        "h": 22,
+        "w": 9,
         "x": 10,
         "y": 0
       },
@@ -476,10 +476,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 10,
-        "x": 0,
-        "y": 18
+        "h": 22,
+        "w": 5,
+        "x": 19,
+        "y": 0
       },
       "id": 2,
       "options": {
@@ -520,15 +520,16 @@
       "type": "table"
     }
   ],
+  "refresh": "5s",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "3484.000000",
-          "value": "3484"
+          "selected": true,
+          "text": "> 9",
+          "value": "9"
         },
         "datasource": {
           "type": "grafadruid-druid-datasource",

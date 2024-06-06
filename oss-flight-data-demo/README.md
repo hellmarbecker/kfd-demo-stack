@@ -6,7 +6,7 @@
 
 2. Ingest data into [Druid](https://localhost:8888) from adsb-json topic with the spec in plt-airt-2000/oss_flight_data_demo/druid/ingestion_spec.json (insert credentials where appropriate).
 
-3. After all messages have been ingested you can check out visualisations in [Grafana](localhost:3000)
+3. After all messages have been ingested you can check out visualisations in [Grafana](localhost:3000), username and password for Grafana are both `druid`
 
 ## TODO
 
