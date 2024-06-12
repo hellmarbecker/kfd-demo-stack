@@ -1,0 +1,251 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 3,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "grafadruid-druid-datasource",
+          "uid": "ddlpoexpk0e80b"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 22,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "basemap": {
+            "config": {},
+            "name": "Layer 0",
+            "type": "default"
+          },
+          "controls": {
+            "mouseWheelZoom": true,
+            "showAttribution": true,
+            "showDebug": false,
+            "showMeasure": false,
+            "showScale": false,
+            "showZoom": true
+          },
+          "layers": [
+            {
+              "config": {
+                "arrow": 0,
+                "style": {
+                  "color": {
+                    "fixed": "dark-green"
+                  },
+                  "lineWidth": 2,
+                  "opacity": 1,
+                  "rotation": {
+                    "fixed": 0,
+                    "max": 360,
+                    "min": -360,
+                    "mode": "mod"
+                  },
+                  "size": {
+                    "fixed": 8,
+                    "max": 15,
+                    "min": 2
+                  },
+                  "symbol": {
+                    "fixed": "img/icons/marker/circle.svg",
+                    "mode": "fixed"
+                  },
+                  "symbolAlign": {
+                    "horizontal": "center",
+                    "vertical": "center"
+                  },
+                  "textConfig": {
+                    "fontSize": 12,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "textAlign": "center",
+                    "textBaseline": "middle"
+                  }
+                }
+              },
+              "filterData": {
+                "id": "byRefId",
+                "options": "Aircraft"
+              },
+              "location": {
+                "mode": "auto"
+              },
+              "name": "Demo",
+              "tooltip": true,
+              "type": "route"
+            },
+            {
+              "config": {
+                "showLegend": true,
+                "style": {
+                  "color": {
+                    "fixed": "dark-red"
+                  },
+                  "opacity": 1,
+                  "rotation": {
+                    "fixed": 0,
+                    "max": 360,
+                    "min": -360,
+                    "mode": "mod"
+                  },
+                  "size": {
+                    "fixed": 10,
+                    "max": 15,
+                    "min": 2
+                  },
+                  "symbol": {
+                    "fixed": "img/icons/marker/triangle.svg",
+                    "mode": "fixed"
+                  },
+                  "symbolAlign": {
+                    "horizontal": "center",
+                    "vertical": "top"
+                  },
+                  "text": {
+                    "field": "client_id",
+                    "fixed": "",
+                    "mode": "field"
+                  },
+                  "textConfig": {
+                    "fontSize": 18,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "textAlign": "center",
+                    "textBaseline": "top"
+                  }
+                }
+              },
+              "filterData": {
+                "id": "byRefId",
+                "options": "Receivers"
+              },
+              "location": {
+                "mode": "auto"
+              },
+              "name": "Receivers",
+              "tooltip": true,
+              "type": "markers"
+            }
+          ],
+          "tooltip": {
+            "mode": "details"
+          },
+          "view": {
+            "allLayers": true,
+            "id": "europe",
+            "lat": 46,
+            "lon": 14,
+            "zoom": 4
+          }
+        },
+        "pluginVersion": "10.4.3",
+        "targets": [
+          {
+            "builder": {
+              "intervals": {
+                "intervals": [
+                  "${__from:date:iso}/${__to:date:iso}"
+                ],
+                "type": "intervals"
+              },
+              "query": "SELECT \"client_id\", \n\"client_lat\" as \"latitude\",\n\"client_lon\" as \"longitude\"\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"client_id\"='demo'",
+              "queryType": "sql"
+            },
+            "datasource": {
+              "type": "grafadruid-druid-datasource",
+              "uid": "ddlpoexpk0e80b"
+            },
+            "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT \\\"client_id\\\", \\n\\\"client_lat\\\" as \\\"latitude\\\",\\n\\\"client_lon\\\" as \\\"longitude\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"client_id\\\"='demo'\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+            "hide": false,
+            "refId": "Aircraft",
+            "settings": {}
+          },
+          {
+            "builder": {
+              "intervals": {
+                "intervals": [
+                  "${__from:date:iso}/${__to:date:iso}"
+                ],
+                "type": "intervals"
+              },
+              "query": "SELECT \"client_id\", \n\"client_lat\" as \"latitude\",\n\"client_lon\" as \"longitude\"\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"latitude\" IS NOT NULL AND \"longitude\" IS NOT NULL AND \"client_id\"='demo'\nORDER BY \"__time\" DESC LIMIT 1\n",
+              "queryType": "sql"
+            },
+            "datasource": {
+              "type": "grafadruid-druid-datasource",
+              "uid": "ddlpoexpk0e80b"
+            },
+            "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT \\\"client_id\\\", \\n\\\"client_lat\\\" as \\\"latitude\\\",\\n\\\"client_lon\\\" as \\\"longitude\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"latitude\\\" IS NOT NULL AND \\\"longitude\\\" IS NOT NULL AND \\\"client_id\\\"='demo'\\nORDER BY \\\"__time\\\" DESC LIMIT 1\\n\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+            "hide": false,
+            "refId": "Receivers",
+            "settings": {}
+          }
+        ],
+        "title": "Demo Route",
+        "type": "geomap"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Demo Receiver",
+    "uid": "edlprxmr2h7uoj",
+    "version": 1,
+    "weekStart": ""
+  }
