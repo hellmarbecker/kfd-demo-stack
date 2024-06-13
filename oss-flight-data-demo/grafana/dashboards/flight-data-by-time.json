@@ -18,7 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 4,
+    "id": 2,
     "links": [],
     "panels": [
       {
@@ -85,7 +85,7 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": false
           },
           "orientation": "auto",
           "showValue": "auto",
@@ -94,7 +94,8 @@
             "mode": "single",
             "sort": "none"
           },
-          "xTickLabelRotation": 90,
+          "xField": "hour",
+          "xTickLabelRotation": 0,
           "xTickLabelSpacing": 0
         },
         "targets": [
@@ -106,14 +107,14 @@
                 ],
                 "type": "intervals"
               },
-              "query": "SELECT\n  TIME_EXTRACT(\"__time\",'hour') AS \"__time\",\n  COUNT (DISTINCT \"aircraft_id\") AS \"aircraft tracked\"\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to})\nAND \"client_id\" IN (${Receiver:sqlstring})\nGROUP BY 1\n",
+              "query": "SELECT\n  TIME_EXTRACT(\"__time\",'hour') AS \"hour\",\n  COUNT (DISTINCT \"aircraft_id\") AS \"aircraft tracked\"\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to})\nAND \"client_id\" IN (${Receiver:sqlstring})\nGROUP BY 1\n",
               "queryType": "sql"
             },
             "datasource": {
               "type": "grafadruid-druid-datasource",
               "uid": "ddlpoexpk0e80b"
             },
-            "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  TIME_EXTRACT(\\\"__time\\\",'hour') AS \\\"__time\\\",\\n  COUNT (DISTINCT \\\"aircraft_id\\\") AS \\\"aircraft tracked\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to})\\nAND \\\"client_id\\\" IN (${Receiver:sqlstring})\\nGROUP BY 1\\n\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+            "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  TIME_EXTRACT(\\\"__time\\\",'hour') AS \\\"hour\\\",\\n  COUNT (DISTINCT \\\"aircraft_id\\\") AS \\\"aircraft tracked\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to})\\nAND \\\"client_id\\\" IN (${Receiver:sqlstring})\\nGROUP BY 1\\n\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
             "refId": "A",
             "settings": {}
           }
@@ -183,9 +184,9 @@
           "groupWidth": 0.75,
           "legend": {
             "calcs": [],
-            "displayMode": "list",
+            "displayMode": "table",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": false
           },
           "orientation": "auto",
           "showValue": "auto",
@@ -194,7 +195,8 @@
             "mode": "single",
             "sort": "none"
           },
-          "xTickLabelRotation": 90,
+          "xField": "hour",
+          "xTickLabelRotation": 0,
           "xTickLabelSpacing": 0
         },
         "targets": [
@@ -206,14 +208,14 @@
                 ],
                 "type": "intervals"
               },
-              "query": "SELECT\n  TIME_EXTRACT(\"__time\",'hour') AS \"__time\",\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\"altitude\"), 0.25) AS \"25percent\",\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\"altitude\"), 0.5) AS \"50percent\",\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\"altitude\"), 0.75) AS \"75percent\"\nFROM \"adsb-json\"\nWHERE  \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to})\nAND \"client_id\" IN (${Receiver:sqlstring})\nGROUP BY 1",
+              "query": "SELECT\n  TIME_EXTRACT(\"__time\",'hour') AS \"hour\",\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\"altitude\"), 0.25) AS \"25percent\",\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\"altitude\"), 0.5) AS \"50percent\",\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\"altitude\"), 0.75) AS \"75percent\"\nFROM \"adsb-json\"\nWHERE  \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to})\nAND \"client_id\" IN (${Receiver:sqlstring})\nGROUP BY 1",
               "queryType": "sql"
             },
             "datasource": {
               "type": "grafadruid-druid-datasource",
               "uid": "ddlpoexpk0e80b"
             },
-            "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  TIME_EXTRACT(\\\"__time\\\",'hour') AS \\\"__time\\\",\\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\\\"altitude\\\"), 0.25) AS \\\"25percent\\\",\\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\\\"altitude\\\"), 0.5) AS \\\"50percent\\\",\\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\\\"altitude\\\"), 0.75) AS \\\"75percent\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE  \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to})\\nAND \\\"client_id\\\" IN (${Receiver:sqlstring})\\nGROUP BY 1\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+            "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  TIME_EXTRACT(\\\"__time\\\",'hour') AS \\\"hour\\\",\\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\\\"altitude\\\"), 0.25) AS \\\"25percent\\\",\\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\\\"altitude\\\"), 0.5) AS \\\"50percent\\\",\\n  DS_GET_QUANTILE(DS_QUANTILES_SKETCH(\\\"altitude\\\"), 0.75) AS \\\"75percent\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE  \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to})\\nAND \\\"client_id\\\" IN (${Receiver:sqlstring})\\nGROUP BY 1\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
             "refId": "A",
             "settings": {}
           }
@@ -230,17 +232,15 @@
           "current": {
             "selected": true,
             "text": [
-              "pema-0",
-              "Hellmar",
-              "demo",
-              "huev"
+              "All"
             ],
             "value": [
-              "pema-0",
-              "Hellmar",
-              "demo",
-              "huev"
+              "$__all"
             ]
+          },
+          "datasource": {
+            "type": "grafadruid-druid-datasource",
+            "uid": "ddlpoexpk0e80b"
           },
           "definition": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  \\\"client_id\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= CURRENT_TIMESTAMP - INTERVAL '1' DAY\\nGROUP BY 1\\nORDER BY 1 DESC\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
           "hide": 0,
