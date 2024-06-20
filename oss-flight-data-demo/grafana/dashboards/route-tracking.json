@@ -194,14 +194,14 @@
               ],
               "type": "intervals"
             },
-            "query": "SELECT *\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"aircraft_id\"=${Aircraft_ID} \nAND \"latitude\" IS NOT NULL\nAND \"longitude\" IS NOT NULL\nAND \"altitude\" IS NOT NULL",
+            "query": "SELECT *\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"hex_ident_val\" IN (${Aircraft:sqlstring})\nAND \"latitude\" IS NOT NULL\nAND \"longitude\" IS NOT NULL\nAND \"altitude\" IS NOT NULL",
             "queryType": "sql"
           },
           "datasource": {
             "type": "grafadruid-druid-datasource",
             "uid": "ddlpoexpk0e80b"
           },
-          "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT *\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"aircraft_id\\\"=${Aircraft_ID} \\nAND \\\"latitude\\\" IS NOT NULL\\nAND \\\"longitude\\\" IS NOT NULL\\nAND \\\"altitude\\\" IS NOT NULL\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+          "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT *\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"hex_ident_val\\\" IN (${Aircraft:sqlstring})\\nAND \\\"latitude\\\" IS NOT NULL\\nAND \\\"longitude\\\" IS NOT NULL\\nAND \\\"altitude\\\" IS NOT NULL\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
           "hide": false,
           "refId": "Aircraft",
           "settings": {}
@@ -293,14 +293,14 @@
               ],
               "type": "intervals"
             },
-            "query": "SELECT\n  *\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"aircraft_id\"=${Aircraft_ID} ORDER BY \"__time\" LIMIT 5",
+            "query": "SELECT\n  *\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"hex_ident_val\" IN (${Aircraft:sqlstring}) ORDER BY \"__time\" LIMIT 5",
             "queryType": "sql"
           },
           "datasource": {
             "type": "grafadruid-druid-datasource",
             "uid": "ddlpoexpk0e80b"
           },
-          "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  *\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"aircraft_id\\\"=${Aircraft_ID} ORDER BY \\\"__time\\\" LIMIT 5\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+          "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  *\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"hex_ident_val\\\" IN (${Aircraft:sqlstring}) ORDER BY \\\"__time\\\" LIMIT 5\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
           "refId": "A",
           "settings": {}
         }
@@ -317,18 +317,22 @@
       {
         "current": {
           "selected": true,
-          "text": "14975.000000",
-          "value": "14975"
+          "text": [
+            "407FCC"
+          ],
+          "value": [
+            "407FCC"
+          ]
         },
         "datasource": {
           "type": "grafadruid-druid-datasource",
           "uid": "ddlpoexpk0e80b"
         },
-        "definition": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT \\\"aircraft_id\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"latitude\\\" IS NOT NULL\\nAND \\\"longitude\\\" IS NOT NULL\\nAND \\\"altitude\\\" IS NOT NULL\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+        "definition": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT \\\"hex_ident_val\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"latitude\\\" IS NOT NULL\\nAND \\\"longitude\\\" IS NOT NULL\\nAND \\\"altitude\\\" IS NOT NULL\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
         "hide": 0,
         "includeAll": false,
         "multi": false,
-        "name": "Aircraft_ID",
+        "name": "Aircraft",
         "options": [],
         "query": {
           "builder": {
@@ -338,10 +342,10 @@
               ],
               "type": "intervals"
             },
-            "query": "SELECT \"aircraft_id\"\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"latitude\" IS NOT NULL\nAND \"longitude\" IS NOT NULL\nAND \"altitude\" IS NOT NULL",
+            "query": "SELECT \"hex_ident_val\"\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"latitude\" IS NOT NULL\nAND \"longitude\" IS NOT NULL\nAND \"altitude\" IS NOT NULL",
             "queryType": "sql"
           },
-          "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT \\\"aircraft_id\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"latitude\\\" IS NOT NULL\\nAND \\\"longitude\\\" IS NOT NULL\\nAND \\\"altitude\\\" IS NOT NULL\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+          "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT \\\"hex_ident_val\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"latitude\\\" IS NOT NULL\\nAND \\\"longitude\\\" IS NOT NULL\\nAND \\\"altitude\\\" IS NOT NULL\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
           "settings": {}
         },
         "refresh": 1,

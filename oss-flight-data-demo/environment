@@ -40,8 +40,8 @@ druid_metadata_storage_connector_password=FoolishPassword
 druid_coordinator_balancer_strategy=cachingCost
 
 druid_worker_capacity=2
-druid_indexer_runner_javaOptsArray=["-server","-Duser.timezone=UTC","-Dfile.encoding=UTF-8","-XX:+ExitOnOutOfMemoryError","-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager","-Xms512m","-Xmx512m","-XX:MaxDirectMemorySize=512m"]
-druid_indexer_fork_property_druid_processing_buffer_sizeBytes=64MiB
+druid_indexer_runner_javaOptsArray=["-server","-Duser.timezone=UTC","-Dfile.encoding=UTF-8","-XX:+ExitOnOutOfMemoryError","-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager","-Xms1024m","-Xmx1024m","-XX:MaxDirectMemorySize=1024m"]
+druid_indexer_fork_property_druid_processing_buffer_sizeBytes=128MiB
 
 druid_manager_lookups_period=10000 # accelerate lookup load operations
 druid_lookup_lookupTier=__default

@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -295,14 +295,14 @@
               ],
               "type": "intervals"
             },
-            "query": "SELECT\n  \"client_id\" AS \"receiver\",\n  COUNT (DISTINCT \"aircraft_id\") AS \"aircraft tracked\"\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"client_id\" IN (${Receiver:sqlstring})\nGROUP BY 1\nORDER BY 2 DESC",
+            "query": "SELECT\n  \"client_id\" AS \"receiver\",\n  COUNT (DISTINCT \"hex_ident_val\") AS \"aircraft tracked\"\nFROM \"adsb-json\"\nWHERE \"__time\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \"__time\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \"client_id\" IN (${Receiver:sqlstring})\nGROUP BY 1\nORDER BY 2 DESC",
             "queryType": "sql"
           },
           "datasource": {
             "type": "grafadruid-druid-datasource",
             "uid": "ddlpoexpk0e80b"
           },
-          "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  \\\"client_id\\\" AS \\\"receiver\\\",\\n  COUNT (DISTINCT \\\"aircraft_id\\\") AS \\\"aircraft tracked\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"client_id\\\" IN (${Receiver:sqlstring})\\nGROUP BY 1\\nORDER BY 2 DESC\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
+          "expr": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  \\\"client_id\\\" AS \\\"receiver\\\",\\n  COUNT (DISTINCT \\\"hex_ident_val\\\") AS \\\"aircraft tracked\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= MILLIS_TO_TIMESTAMP(${__from}) AND \\\"__time\\\" <= MILLIS_TO_TIMESTAMP(${__to}) AND \\\"client_id\\\" IN (${Receiver:sqlstring})\\nGROUP BY 1\\nORDER BY 2 DESC\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
           "refId": "A",
           "settings": {}
         }
@@ -321,17 +321,15 @@
         "current": {
           "selected": true,
           "text": [
-            "huev",
-            "demo",
-            "Hellmar",
-            "pema-0"
+            "All"
           ],
           "value": [
-            "huev",
-            "demo",
-            "Hellmar",
-            "pema-0"
+            "$__all"
           ]
+        },
+        "datasource": {
+          "type": "grafadruid-druid-datasource",
+          "uid": "ddlpoexpk0e80b"
         },
         "definition": "{\"builder\":{\"queryType\":\"sql\",\"query\":\"SELECT\\n  \\\"client_id\\\"\\nFROM \\\"adsb-json\\\"\\nWHERE \\\"__time\\\" >= CURRENT_TIMESTAMP - INTERVAL '1' DAY\\nGROUP BY 1\\nORDER BY 1 DESC\",\"intervals\":{\"type\":\"intervals\",\"intervals\":[\"${__from:date:iso}/${__to:date:iso}\"]}},\"settings\":{}}",
         "hide": 0,
